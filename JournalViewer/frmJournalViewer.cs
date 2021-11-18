@@ -14,8 +14,13 @@ namespace JournalViewer
 {
     public partial class frmJournalViewer : Form
     {
+        //May not be needed, but have a reference back to the starting class.
         frmMain parent;
+        
+        //Stores the entry data for our journal.
         List<Entry> journalEntries = new List<Entry>();
+        
+        //Stores the currently opened file.
         string fileOpened = "";
 
         public frmJournalViewer()
@@ -26,7 +31,11 @@ namespace JournalViewer
         public frmJournalViewer(frmMain parent)
         {
             InitializeComponent();
+
+            //Set the parent of the form.
             this.parent = parent;
+
+            //Is SUPPOSED
             parent.Hide();
             parent.Visible = false;
         }
@@ -38,7 +47,7 @@ namespace JournalViewer
 
         private void btnAddNewEntry_Click(object sender, EventArgs e)
         {
-            frmNewEntry obj = new frmNewEntry(this);
+            frmEntryForm obj = new frmEntryForm(this, EntryMode.Add, null);
 
             obj.Show();
         }
@@ -49,7 +58,7 @@ namespace JournalViewer
             updateGrid();
         }
 
-        private void updateGrid()
+        public void updateGrid()
         {
             //Clear out all entries currently in the row.
             grdEntryViewer.Rows.Clear();
@@ -93,7 +102,7 @@ namespace JournalViewer
 
         private void openJournalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 StreamReader file = new StreamReader(openFileDialog1.FileName);
 
@@ -111,6 +120,11 @@ namespace JournalViewer
 
         private void saveJounralToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            saveJournal();
+        }
+
+        private void saveJournal()
+        {
             try
             {
                 StreamWriter file = new StreamWriter(fileOpened);
@@ -123,27 +137,76 @@ namespace JournalViewer
 
                 MessageBox.Show("Save Successfully to \"" + fileOpened + "\".", "Journal Saved");
             }
-            catch (Exception error)
+            catch (Exception)
             {
                 MessageBox.Show("Error:  Could not open file.  Make sure you either open an exiting file or " +
                     "create a new file.  Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
 
+        }
         private void grdEntryViewer_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            //An index of -1 means the user clicked on the header column.  Back out and do nothing.
+            if (e.RowIndex == -1)
+                return;
+
+            //If we clicked on Edit button....
             if (e.ColumnIndex == grdEntryViewer.Columns["clmEdit"].Index)
             {
-               
+                Entry entry = journalEntries[e.RowIndex];
+                frmEntryForm obj = new frmEntryForm(this, EntryMode.Edit, entry);
+                obj.Show();
 
-                //Grab Row 0 column 0
-                string title = grdEntryViewer.Rows[e.RowIndex].Cells[0].Value.ToString();
-                MessageBox.Show(title, "Clicked Event");
+            }
 
-                //Grabs the matching entry
-                string match_title = journalEntries[e.RowIndex].Title;
+            //If we clicked on View button....
+            else if (e.ColumnIndex == grdEntryViewer.Columns["clmView"].Index)
+            {
+                Entry entry = journalEntries[e.RowIndex];
+                frmEntryViewer obj = new frmEntryViewer(this, entry);
+                obj.Show();
+            }
+
+            //If we clicked on Delete button....
+            else if (e.ColumnIndex == grdEntryViewer.Columns["clmDelete"].Index)
+            {
+                DialogResult result = MessageBox.Show("Are you sure you want to remove this from your journal?", "Remove Entry", MessageBoxButtons.YesNo);
+
+                if(result == DialogResult.Yes)
+                {
+                    journalEntries.RemoveAt(e.RowIndex);
+                    updateGrid();
+                }
             }
         }
+
+        //Defines what happens when we press the forms "x"(close) button.
+        private void frmJournalViewer_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //Start form Shutdown
+            closeProgram();
+        }
+
+        void closeProgram()
+        {
+            DialogResult result = MessageBox.Show("Do you want to save your journal?", "Close Program", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                saveJournal();
+
+                //Close the entire application and destroy all forms.
+                Application.Exit();
+            }
+            else if (result == DialogResult.No)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void exitProgramToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            closeProgram();
+        }
     }
-
-
+}

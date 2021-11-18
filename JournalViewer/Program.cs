@@ -6,6 +6,13 @@ using System.Windows.Forms;
 
 namespace JournalViewer
 {
+    public enum EntryMode
+    {
+        None,
+        Edit,
+        Add
+    }
+
     static class Program
     {
         /// <summary>
@@ -14,9 +21,15 @@ namespace JournalViewer
         [STAThread]
         static void Main()
         {
+            frmMain f;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            
+            f = new frmMain();
+            Application.Run(f);
+
+            f.Hide();
         }
     }
 }

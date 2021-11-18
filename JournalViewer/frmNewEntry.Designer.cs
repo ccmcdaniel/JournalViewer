@@ -1,7 +1,7 @@
 ﻿
 namespace JournalViewer
 {
-    partial class frmNewEntry
+    partial class frmEntryForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,6 @@ namespace JournalViewer
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.txtJournalTitle = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dteJournalDate = new System.Windows.Forms.DateTimePicker();
             this.txtJournalEntryContent = new System.Windows.Forms.TextBox();
             this.btnSubmit = new System.Windows.Forms.Button();
@@ -47,7 +46,6 @@ namespace JournalViewer
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21F));
             this.tableLayoutPanel1.Controls.Add(this.txtJournalTitle, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.dateTimePicker1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.dteJournalDate, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtJournalEntryContent, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnSubmit, 1, 3);
@@ -71,13 +69,6 @@ namespace JournalViewer
             this.txtJournalTitle.Name = "txtJournalTitle";
             this.txtJournalTitle.Size = new System.Drawing.Size(251, 20);
             this.txtJournalTitle.TabIndex = 0;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(3, 3);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(14, 20);
-            this.dateTimePicker1.TabIndex = 1;
             // 
             // dteJournalDate
             // 
@@ -116,15 +107,17 @@ namespace JournalViewer
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // frmNewEntry
+            // frmEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(555, 303);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "frmNewEntry";
-            this.Text = "frmNewEntry";
+            this.Name = "frmEntryForm";
+            this.Text = "frmEntryForm";
+            this.Load += new System.EventHandler(this.frmEntryForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -135,7 +128,6 @@ namespace JournalViewer
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox txtJournalTitle;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dteJournalDate;
         private System.Windows.Forms.TextBox txtJournalEntryContent;
         private System.Windows.Forms.Button btnSubmit;

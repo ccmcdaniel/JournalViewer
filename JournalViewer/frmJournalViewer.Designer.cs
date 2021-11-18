@@ -45,9 +45,9 @@ namespace JournalViewer
             this.clmEdit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.clmView = new System.Windows.Forms.DataGridViewButtonColumn();
             this.clmDelete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.lblFileOpened = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.lblFileOpened = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -101,21 +101,21 @@ namespace JournalViewer
             // createNewJournalToolStripMenuItem
             // 
             this.createNewJournalToolStripMenuItem.Name = "createNewJournalToolStripMenuItem";
-            this.createNewJournalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createNewJournalToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.createNewJournalToolStripMenuItem.Text = "Create New Journal";
             this.createNewJournalToolStripMenuItem.Click += new System.EventHandler(this.createNewJournalToolStripMenuItem_Click);
             // 
             // openJournalToolStripMenuItem
             // 
             this.openJournalToolStripMenuItem.Name = "openJournalToolStripMenuItem";
-            this.openJournalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openJournalToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.openJournalToolStripMenuItem.Text = "Open Journal ";
             this.openJournalToolStripMenuItem.Click += new System.EventHandler(this.openJournalToolStripMenuItem_Click);
             // 
             // saveJounralToolStripMenuItem
             // 
             this.saveJounralToolStripMenuItem.Name = "saveJounralToolStripMenuItem";
-            this.saveJounralToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveJounralToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.saveJounralToolStripMenuItem.Text = "Save Jounral";
             this.saveJounralToolStripMenuItem.Click += new System.EventHandler(this.saveJounralToolStripMenuItem_Click);
             // 
@@ -124,6 +124,7 @@ namespace JournalViewer
             this.exitProgramToolStripMenuItem.Name = "exitProgramToolStripMenuItem";
             this.exitProgramToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitProgramToolStripMenuItem.Text = "Exit Program";
+            this.exitProgramToolStripMenuItem.Click += new System.EventHandler(this.exitProgramToolStripMenuItem_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -214,17 +215,6 @@ namespace JournalViewer
             this.clmDelete.Text = "Delete";
             this.clmDelete.UseColumnTextForButtonValue = true;
             // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.DefaultExt = "journal";
-            this.saveFileDialog1.FileName = "NewJournal.journal";
-            this.saveFileDialog1.Filter = "Journal files|*.journal";
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "Journal|*.journal";
-            // 
             // lblFileOpened
             // 
             this.lblFileOpened.AutoSize = true;
@@ -236,6 +226,17 @@ namespace JournalViewer
             this.lblFileOpened.Text = "No File Opened....";
             this.lblFileOpened.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "journal";
+            this.saveFileDialog1.FileName = "NewJournal.journal";
+            this.saveFileDialog1.Filter = "Journal files|*.journal";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Journal|*.journal";
+            // 
             // frmJournalViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -244,7 +245,8 @@ namespace JournalViewer
             this.Controls.Add(this.tableLayoutPanel1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmJournalViewer";
-            this.Text = "frmJournalViewer";
+            this.Text = "Journal Manager";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmJournalViewer_FormClosed);
             this.Load += new System.EventHandler(this.frmJournalViewer_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
