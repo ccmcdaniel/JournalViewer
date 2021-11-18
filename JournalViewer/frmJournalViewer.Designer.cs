@@ -38,17 +38,19 @@ namespace JournalViewer
             this.exitProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAddNewEntry = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.grdEntryViewer = new System.Windows.Forms.DataGridView();
             this.clmTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmContents = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmEdit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.clmView = new System.Windows.Forms.DataGridViewButtonColumn();
             this.clmDelete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdEntryViewer)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -60,7 +62,7 @@ namespace JournalViewer
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.menuStrip1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.grdEntryViewer, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -99,12 +101,14 @@ namespace JournalViewer
             this.createNewJournalToolStripMenuItem.Name = "createNewJournalToolStripMenuItem";
             this.createNewJournalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.createNewJournalToolStripMenuItem.Text = "Create New Journal";
+            this.createNewJournalToolStripMenuItem.Click += new System.EventHandler(this.createNewJournalToolStripMenuItem_Click);
             // 
             // openJournalToolStripMenuItem
             // 
             this.openJournalToolStripMenuItem.Name = "openJournalToolStripMenuItem";
             this.openJournalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openJournalToolStripMenuItem.Text = "Open Journal ";
+            this.openJournalToolStripMenuItem.Click += new System.EventHandler(this.openJournalToolStripMenuItem_Click);
             // 
             // saveJounralToolStripMenuItem
             // 
@@ -137,26 +141,26 @@ namespace JournalViewer
             this.btnAddNewEntry.UseVisualStyleBackColor = true;
             this.btnAddNewEntry.Click += new System.EventHandler(this.btnAddNewEntry_Click);
             // 
-            // dataGridView1
+            // grdEntryViewer
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.grdEntryViewer.AllowUserToAddRows = false;
+            this.grdEntryViewer.AllowUserToDeleteRows = false;
+            this.grdEntryViewer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.grdEntryViewer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdEntryViewer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clmTitle,
             this.clmContents,
             this.clm,
             this.clmEdit,
             this.clmView,
             this.clmDelete});
-            this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 2);
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(23, 33);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(770, 397);
-            this.dataGridView1.TabIndex = 2;
+            this.tableLayoutPanel1.SetColumnSpan(this.grdEntryViewer, 2);
+            this.grdEntryViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdEntryViewer.Location = new System.Drawing.Point(23, 33);
+            this.grdEntryViewer.Name = "grdEntryViewer";
+            this.grdEntryViewer.ReadOnly = true;
+            this.grdEntryViewer.Size = new System.Drawing.Size(770, 397);
+            this.grdEntryViewer.TabIndex = 2;
             // 
             // clmTitle
             // 
@@ -206,6 +210,17 @@ namespace JournalViewer
             this.clmDelete.Text = "Delete";
             this.clmDelete.UseColumnTextForButtonValue = true;
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "journal";
+            this.saveFileDialog1.FileName = "NewJournal.journal";
+            this.saveFileDialog1.Filter = "Journal files|*.journal";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Journal|*.journal";
+            // 
             // frmJournalViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -221,7 +236,7 @@ namespace JournalViewer
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdEntryViewer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -237,12 +252,14 @@ namespace JournalViewer
         private System.Windows.Forms.ToolStripMenuItem exitProgramToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnAddNewEntry;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView grdEntryViewer;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmContents;
         private System.Windows.Forms.DataGridViewTextBoxColumn clm;
         private System.Windows.Forms.DataGridViewButtonColumn clmEdit;
         private System.Windows.Forms.DataGridViewButtonColumn clmView;
         private System.Windows.Forms.DataGridViewButtonColumn clmDelete;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
