@@ -47,6 +47,7 @@ namespace JournalViewer
             this.clmDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.lblFileOpened = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -63,6 +64,7 @@ namespace JournalViewer
             this.tableLayoutPanel1.Controls.Add(this.menuStrip1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.grdEntryViewer, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblFileOpened, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -115,6 +117,7 @@ namespace JournalViewer
             this.saveJounralToolStripMenuItem.Name = "saveJounralToolStripMenuItem";
             this.saveJounralToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveJounralToolStripMenuItem.Text = "Save Jounral";
+            this.saveJounralToolStripMenuItem.Click += new System.EventHandler(this.saveJounralToolStripMenuItem_Click);
             // 
             // exitProgramToolStripMenuItem
             // 
@@ -161,6 +164,7 @@ namespace JournalViewer
             this.grdEntryViewer.ReadOnly = true;
             this.grdEntryViewer.Size = new System.Drawing.Size(770, 397);
             this.grdEntryViewer.TabIndex = 2;
+            this.grdEntryViewer.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdEntryViewer_CellContentClick);
             // 
             // clmTitle
             // 
@@ -221,6 +225,17 @@ namespace JournalViewer
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Journal|*.journal";
             // 
+            // lblFileOpened
+            // 
+            this.lblFileOpened.AutoSize = true;
+            this.lblFileOpened.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblFileOpened.Location = new System.Drawing.Point(411, 0);
+            this.lblFileOpened.Name = "lblFileOpened";
+            this.lblFileOpened.Size = new System.Drawing.Size(382, 30);
+            this.lblFileOpened.TabIndex = 3;
+            this.lblFileOpened.Text = "No File Opened....";
+            this.lblFileOpened.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // frmJournalViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,5 +276,6 @@ namespace JournalViewer
         private System.Windows.Forms.DataGridViewButtonColumn clmDelete;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label lblFileOpened;
     }
 }

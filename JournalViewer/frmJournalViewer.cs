@@ -16,6 +16,7 @@ namespace JournalViewer
     {
         frmMain parent;
         List<Entry> journalEntries = new List<Entry>();
+        string fileOpened = "";
 
         public frmJournalViewer()
         {
@@ -66,6 +67,12 @@ namespace JournalViewer
             }
         }
 
+        private void setCurrentFile(string fileName)
+        {
+            fileOpened = fileName;
+            lblFileOpened.Text = fileName;
+        }
+
         private void createNewJournalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -77,6 +84,8 @@ namespace JournalViewer
                 string save_data = JsonSerializer.Serialize(journalEntries);
 
                 file.Write(save_data);
+
+                setCurrentFile(saveFileDialog1.FileName);
 
                 file.Close();
             }
@@ -94,8 +103,47 @@ namespace JournalViewer
 
                 updateGrid();
 
+                setCurrentFile(openFileDialog1.FileName);
+
                 file.Close();
             }
         }
+
+        private void saveJounralToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                StreamWriter file = new StreamWriter(fileOpened);
+
+                string save_data = JsonSerializer.Serialize(journalEntries);
+
+                file.Write(save_data);
+
+                file.Close();
+
+                MessageBox.Show("Save Successfully to \"" + fileOpened + "\".", "Journal Saved");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Error:  Could not open file.  Make sure you either open an exiting file or " +
+                    "create a new file.  Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void grdEntryViewer_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == grdEntryViewer.Columns["clmEdit"].Index)
+            {
+               
+
+                //Grab Row 0 column 0
+                string title = grdEntryViewer.Rows[e.RowIndex].Cells[0].Value.ToString();
+                MessageBox.Show(title, "Clicked Event");
+
+                //Grabs the matching entry
+                string match_title = journalEntries[e.RowIndex].Title;
+            }
+        }
     }
-}
+
+
